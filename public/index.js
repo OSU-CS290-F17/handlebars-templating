@@ -1,4 +1,14 @@
+var photoCardTemplate = null;
+
 function createPhotoCard(photoURL, caption) {
+
+  var photoCardTemplateArgs = {
+    photoURL: photoURL,
+    caption: caption
+  };
+
+  var photoCardHTML = photoCardTemplate(photoCardTemplateArgs);
+  console.log("== photoCardHTML:", photoCardHTML);
 
   var photoCardSection = document.createElement('section');
   photoCardSection.classList.add('photo-card');
@@ -90,5 +100,8 @@ window.addEventListener('DOMContentLoaded', function () {
   for (var i = 0; i < modalHideButtons.length; i++) {
     modalHideButtons[i].addEventListener('click', hideModal);
   }
+
+  var photoCardTemplateElem = document.getElementById('photo-card-template');
+  photoCardTemplate = Handlebars.compile(photoCardTemplateElem.innerHTML);
 
 });
