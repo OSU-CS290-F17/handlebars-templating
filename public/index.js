@@ -1,4 +1,3 @@
-var photoCardTemplate = null;
 
 function createPhotoCard(photoURL, caption) {
 
@@ -7,27 +6,29 @@ function createPhotoCard(photoURL, caption) {
     caption: caption
   };
 
-  var photoCardHTML = photoCardTemplate(photoCardTemplateArgs);
+  var photoCardHTML = Handlebars.templates.photoCard(photoCardTemplateArgs);
   console.log("== photoCardHTML:", photoCardHTML);
 
-  var photoCardSection = document.createElement('section');
-  photoCardSection.classList.add('photo-card');
+  return photoCardHTML;
 
-  var imgContainerDiv = document.createElement('div');
-  imgContainerDiv.classList.add('img-container');
-  photoCardSection.appendChild(imgContainerDiv);
+  // var photoCardSection = document.createElement('section');
+  // photoCardSection.classList.add('photo-card');
+  //
+  // var imgContainerDiv = document.createElement('div');
+  // imgContainerDiv.classList.add('img-container');
+  // photoCardSection.appendChild(imgContainerDiv);
+  //
+  // var img = document.createElement('img');
+  // img.classList.add('person-photo-img');
+  // img.src = photoURL;
+  // imgContainerDiv.appendChild(img);
+  //
+  // var captionDiv = document.createElement('div');
+  // captionDiv.classList.add('caption');
+  // captionDiv.textContent = caption;
+  // photoCardSection.appendChild(captionDiv);
 
-  var img = document.createElement('img');
-  img.classList.add('person-photo-img');
-  img.src = photoURL;
-  imgContainerDiv.appendChild(img);
-
-  var captionDiv = document.createElement('div');
-  captionDiv.classList.add('caption');
-  captionDiv.textContent = caption;
-  photoCardSection.appendChild(captionDiv);
-
-  return photoCardSection;
+  // return photoCardSection;
 
 }
 
@@ -43,7 +44,10 @@ function handleModalAcceptClick() {
 
     var newPhotoCard = createPhotoCard(photoURL, caption);
     var photoCardContainer = document.querySelector('.photo-card-container');
-    photoCardContainer.appendChild(newPhotoCard);
+    // photoCardContainer.appendChild(newPhotoCard);
+
+    photoCardContainer.insertAdjacentHTML('beforeend', newPhotoCard);
+
     hideModal();
 
   }
@@ -101,7 +105,7 @@ window.addEventListener('DOMContentLoaded', function () {
     modalHideButtons[i].addEventListener('click', hideModal);
   }
 
-  var photoCardTemplateElem = document.getElementById('photo-card-template');
-  photoCardTemplate = Handlebars.compile(photoCardTemplateElem.innerHTML);
+  // var photoCardTemplateElem = document.getElementById('photo-card-template');
+  // photoCardTemplate = Handlebars.compile(photoCardTemplateElem.innerHTML);
 
 });
